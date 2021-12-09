@@ -1,0 +1,159 @@
+<style media="screen">
+  .backr {
+    padding: 5px 0;
+    background: #5DADE2;
+    margin: 0;
+  }
+  .pad {
+    padding: 30px;
+  }
+
+  body {
+    font-family: "Tahoma", sans-serif
+   }
+
+   .bgcolor
+   {
+     background: #5DADE2;
+   }
+   .colors
+   {
+     background: #45B39D;
+     height: 40px;
+     width: 350px;
+     font-size: 15px;
+     font-family: monospace bold;
+     border-radius: 3px;
+     padding: 7px;
+   }
+   
+   form
+   {
+   }
+   </style>
+<body class="bgcolor">
+<div class="backr">
+
+<!--<li><%= link_to "Edit", edit_agenda_path(@agenda) %></li> -->
+
+<div align="left" class="pad">
+<center><h3>Tasks:</h3></center>
+<br></br>
+
+<% @agenda.tasks.each do |task| %>
+
+  <div class="container">
+  <div class="row g-1">
+    <div class="col-12">
+    <center>
+      <div class="colors">
+          <p>
+            <strong>Name:</strong>
+            <%= task.name %>
+          </p>
+        </div>
+      </center>
+    </div>
+    <p></p>
+    <center>
+    <div class="col-12">
+      <div class="colors">
+        <p>
+          <strong>Description:</strong>
+          <%= task.description %>
+        </p>
+      </div>
+      </center>
+    </div>
+    <p></p>
+    <center>
+    <div class="col-12">
+      <div class="colors">
+        <p>
+          <strong>Code:</strong>
+          <%= task.code %>
+        </p>
+      </div>
+      </center>
+    </div>
+    <p></p>
+    <div class="col-12">
+    <center>
+      <div class="colors">
+        <p>
+          <strong>Due_date:</strong>
+          <%= task.due_date %>
+        </p>
+      </div>
+      </center>
+    </div>
+  </div>
+</div>
+
+<br></br>
+
+<% end %>
+<center><h3>Notes:</h3></center>
+<p></p>
+<center>
+<% @agenda.notes.each do |note| %>
+
+<div class="container">
+  <div class="row g-1">
+    <div class="col-12">
+      <div class="colors">
+        <p>
+          <strong>Descripcion:</strong>
+          <%= note.body %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</center>
+
+
+<% end %>
+<br></br>
+<center>
+<h3>New Task:</h3>
+<p></p>
+<%= form_with model: [ @agenda, @agenda.tasks.build ] do |form| %>
+  <p>
+    <h5><%= form.label :name %></h5><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.label :code %><br>
+    <%= form.text_area :code %>
+  </p>
+  <p>
+    <%= form.label :due_date %><br>
+    <%= form.date_field :due_date %>
+  </p>
+  <p>
+    <input class="btn btn-outline-dark" <%= form.submit %>
+  </p>
+<% end %>
+</center>
+<br></br>
+<center>
+<h2>New Note:</h2>
+<p></p>
+<%= form_with model: [ @agenda, @agenda.notes.build ] do |form| %>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <input class="btn btn-outline-dark" <%= form.submit %>
+  </p>
+<% end %>
+</center>
+</div>
+</div>
+</body>
